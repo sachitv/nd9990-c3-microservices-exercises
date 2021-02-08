@@ -14,8 +14,12 @@ script:
   - npm run build
   - docker build . -t udagram-api-users
   - docker tag udagram-api-users sachitv/udagram-api-users
+  - cd ../udagram-frontend
+  - docker build . -t udagram-frontend
+  - docker tag udagram-frontend sachitv/udagram-frontend
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sachitv/udagram-api-feed
   - docker push sachitv/udagram-api-users
+  - docker push sachitv/udagram-frontend
