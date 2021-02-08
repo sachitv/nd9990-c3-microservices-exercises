@@ -1,1 +1,5 @@
 project/set_env.sh
+project/deployments/env-configmap.yaml
+project/deployments/env-secret.yaml
+project/deployments/aws-secret.yaml
+project/deployments/aws_credentials.txt

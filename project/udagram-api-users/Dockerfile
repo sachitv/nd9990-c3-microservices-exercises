@@ -6,8 +6,8 @@ COPY package*.json ./
 
 RUN npm ci
 
-COPY www www
+COPY . .
 
 EXPOSE 8080
 
-CMD [ "npm", "run", "prod" ]
+CMD ["npm", "run", "prod"]

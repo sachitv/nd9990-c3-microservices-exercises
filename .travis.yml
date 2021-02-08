@@ -6,14 +6,10 @@ node_js:
 script:
   # Feed API
   - cd project/udagram-api-feed
-  - npm ci
-  - npm run build
   - docker build . -t udagram-api-feed
   - docker tag udagram-api-feed sachitv/udagram-api-feed
   # Users API
   - cd ../udagram-api-users
-  - npm ci
-  - npm run build
   - docker build . -t udagram-api-users
   - docker tag udagram-api-users sachitv/udagram-api-users
   # Frontend

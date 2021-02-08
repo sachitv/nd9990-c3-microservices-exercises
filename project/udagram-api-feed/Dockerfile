@@ -6,7 +6,7 @@ COPY package*.json ./
 
 RUN npm ci
 
-COPY www www
+COPY . .
 
 EXPOSE 8080
 
