@@ -1,0 +1,21 @@
+language: node_js
+services:
+  - docker
+node_js:
+  - 12
+script:
+  - cd project/udagram-api-feed
+  - npm ci
+  - npm run build
+  - docker build . -t udagram-api-feed
+  - docker tag udagram-api-feed sachitv/udagram-api-feed
+  - cd ../udagram-api-users
+  - npm ci
+  - npm run build
+  - docker build . -t udagram-api-users
+  - docker tag udagram-api-users sachitv/udagram-api-users
+
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push sachitv/udagram-api-feed
+  - docker push sachitv/udagram-api-users
