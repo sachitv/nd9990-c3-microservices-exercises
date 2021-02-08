@@ -4,22 +4,30 @@ services:
 node_js:
   - 12
 script:
+  # Feed API
   - cd project/udagram-api-feed
   - npm ci
   - npm run build
   - docker build . -t udagram-api-feed
   - docker tag udagram-api-feed sachitv/udagram-api-feed
+  # Users API
   - cd ../udagram-api-users
   - npm ci
   - npm run build
   - docker build . -t udagram-api-users
   - docker tag udagram-api-users sachitv/udagram-api-users
+  # Frontend
   - cd ../udagram-frontend
   - docker build . -t udagram-frontend
   - docker tag udagram-frontend sachitv/udagram-frontend
+  # Reverseproxy
+  - cd ../reverseproxy
+  - docker build . -t reverseproxy
+  - docker tag reverseproxy sachitv/reverseproxy
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push sachitv/udagram-api-feed
   - docker push sachitv/udagram-api-users
   - docker push sachitv/udagram-frontend
+  - docker push sachitv/reverseproxy
